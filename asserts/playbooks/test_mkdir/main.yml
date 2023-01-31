@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  remote_user: root
+  tasks:
+    - name: ping this host
+      ping:
+    - name: make directory test
+      file:
+        path: /tmp/test2
+        state: directory

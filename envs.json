@@ -1,0 +1,32 @@
+[
+  {
+    "source_key": "CELERY_BROKER",
+    "env_key": "CELERY_BROKER",
+    "examples": "redis://:123456@redis.service.consul:6379/10",
+    "desc": "celery的broker"
+  },
+  {
+    "source_key": "CELERY_BROKEND",
+    "env_key": "CELERY_BROKEND",
+    "examples": "redis://:123456@redis.service.consul:6379/11",
+    "desc": "celery的brokend(db为11)"
+  },
+  {
+    "source_key": "VAULT_URL",
+    "env_key": "VAULT_URL",
+    "examples": "http://vault.example.com",
+    "desc": "凭据地址"
+  },
+  {
+    "source_key": "VAULT_TOKEN",
+    "env_key": "VAULT_TOKEN",
+    "examples": "Sajshfsuhdhdasd",
+    "desc": "凭据token"
+  },
+  {
+    "source_key": "REDIS_URL",
+    "env_key": "REDIS_URL",
+    "examples": "redis://:123456@redis.service.consul:6379/11",
+    "desc": "redis地址"
+  }
+]

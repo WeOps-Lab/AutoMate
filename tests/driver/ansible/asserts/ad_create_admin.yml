@@ -1,0 +1,15 @@
+---
+- name: Make sure we have an admin user.
+  hosts: localhost
+  tasks:
+    community.general.ldap_entry:
+      dn: cn=justin2,dc=cwtest,dc=com
+      objectClass:
+        - simpleSecurityObject
+        - organizationalRole
+      attributes:
+        description: An LDAP administrator
+        userPassword: 1qaz@WSX
+      server_uri: ldap://192.168.103.140
+      bind_dn=: CN=陈一呼,OU=权限账户,DC=cwtest,DC=com
+      bind_pw=: AAAaaa111!

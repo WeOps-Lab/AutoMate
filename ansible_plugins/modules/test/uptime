@@ -1,0 +1,8 @@
+#!/usr/bin/python
+
+import json
+import os
+
+up = os.popen('uptime').read()
+dic = {"result":up}
+print(json.dumps(dic))

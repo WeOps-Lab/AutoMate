@@ -1,0 +1,8 @@
+---
+- name: Test the plabybook API.
+  hosts: localhost
+  remote_user: root
+  gather_facts: yes
+  tasks:
+    - name: exec uptime.py
+      shell: uptime.py
