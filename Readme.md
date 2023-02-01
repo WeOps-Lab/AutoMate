@@ -1,4 +1,5 @@
 # AutoMate
+![](https://wedoc.canway.net/imgs/img/嘉为蓝鲸.jpg)
 
 AutoMate是一个无状态的自动化运维服务，为上层应用提供运维动作的Restful服务.
 
