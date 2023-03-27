@@ -8,12 +8,12 @@ from core.service.base import DriverService
 
 class AnsibleService(DriverService):
     __driver_tag__ = "ansible"
-    driver_run_fn = "run_local_adhoc"
+    driver_run_fn = "run_adhoc"
     # 指定module
     module = ""
 
     def _run(self):
-        adhoc_result: AdHocResult = self.driver.run_local_adhoc(
+        adhoc_result: AdHocResult = self.driver.run_adhoc(
             module_name=self.__class__.module, module_args=parse_dict_to_args(self.input.dict())
         )
         self.output = self.output_model(**adhoc_result.result)

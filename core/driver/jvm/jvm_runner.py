@@ -12,5 +12,5 @@ class JvmRunner(Driver):
         jpype.addClassPath("jars/umr.jar")
         test = jpype.JClass("org.megalab.Test")
         t = test()
-        res = t.run_local_adhoc("hello world")
+        res = t.run_adhoc("hello world")
         return res

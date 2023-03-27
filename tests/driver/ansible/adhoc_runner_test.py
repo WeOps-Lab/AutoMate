@@ -12,12 +12,12 @@ class AnsibleRunnerTest(unittest.TestCase):
 
     def test_run(self):
         runner = AnsibleDriver()
-        result = runner.run_local_adhoc(module_name="ping", module_args="")
+        result = runner.run_adhoc(module_name="ping", module_args="")
         print(result)
 
     def test_run_ad(self):
         runner = AnsibleDriver()
-        result = runner.run_local_adhoc(module_name="update_password", module_args="")
+        result = runner.run_adhoc(module_name="update_password", module_args="")
         print(result)
 
 

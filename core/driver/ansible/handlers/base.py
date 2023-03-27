@@ -1,4 +1,5 @@
 import json
+import os
 from collections import OrderedDict
 
 from core.db.redis_client import redis_client
@@ -28,3 +29,5 @@ class BaseHandler(metaclass=BaseMetaHandler):
     def finished_callback(cls, runner):
         timeout = runner.config.timeout or c.DEFAULT_ANSIBLE_RUNNER_MAX_TIMEOUT
         redis_client.set(c.ANSIBLE_RUNNER_KEY.format(runner._uuid), json.dumps({"status": runner.status}), ex=timeout)
+        if runner.temporary_inventory_file:
+            os.remove(runner.temporary_inventory_file)

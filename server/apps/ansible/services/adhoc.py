@@ -7,7 +7,7 @@ from server.apps.ansible.forms.adhoc import ADHocModel
 
 class AnsibleAdHocService(DriverService):
     __driver_tag__ = "ansible"
-    driver_run_fn = "run_local_adhoc"
+    driver_run_fn = "run_adhoc"
     input_model = ADHocModel
     output_model = AdHocResult
 
@@ -19,9 +19,10 @@ class AnsibleAdHocService(DriverService):
         logger.info(f"input:{self.input.dict()}")
 
     def _run(self):
-        self.output = self.driver.run_local_adhoc(
+        self.output = self.driver.run_adhoc(
             module_name=self.input.module,
             module_args=self.input.module_args,
+            inventory=self.input.inventory,
             extravars=self.input.extra_vars,
             is_async=self.input.is_async,
             timeout=self.input.timeout,
