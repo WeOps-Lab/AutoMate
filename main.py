@@ -3,6 +3,7 @@ import uvicorn
 from core.bootstrap import BootStrap
 from core.settings import settings
 from server.apps.ansible.url import ansible_api
+from server.apps.cloud.url import cloud_api
 from server.apps.core.url import core_api
 from server.apps.network.url import network_api
 from server.apps.task.url import task_api
@@ -15,6 +16,7 @@ bootstrap = BootStrap(
         core_api,
         ansible_api,
         task_api,
+        cloud_api,
     ],
 )
 bootstrap.boot()

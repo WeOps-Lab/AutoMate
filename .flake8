@@ -26,3 +26,4 @@ exclude =
     .eggs,
     *migrations*,
     sop_plugins/*
+    core/prometheus/prometheus_pb2.py

@@ -20,9 +20,7 @@ CELERY_TRACK_STARTED = True  # 记录任务正在运行running,而不是pending 
 CELERY_MAX_TASKS_PER_CHILD = 100  # 一个worker处理最大任务数,防止内存泄露
 
 CELERY_IMPORTS = [
-    "server.apps.collect.task.collect_task",
     "core.tasks",
-    "server.apps.network.services.topology_discovery.topology_discovery",
     "server.apps.cloud.tasks.monitor",
 ]
 

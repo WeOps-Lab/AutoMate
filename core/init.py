@@ -18,8 +18,10 @@ class InitService(object):
             # 把自定义模块写入到环境变量中,方便模块寻找
             os.environ["ANSIBLE_LIBRARY"] = settings.ansible_library
             os.environ["ANSIBLE_MODULE_UTILS"] = settings.ansible_module_utils
+            os.environ["ANSIBLE_SSH_TIMEOUT"] = settings.ansible_ssh_timeout
             _register_driver()
             _register_ansible_handler()
+            _register_cmp_plugins()
             _init_credentials()
             _init_format()
             _init_logger()
@@ -28,6 +30,10 @@ class InitService(object):
 
 def _register_driver():
     AutoDiscover(pathlib.Path(settings.driver_path))()
+
+
+def _register_cmp_plugins():
+    AutoDiscover(pathlib.Path(settings.cmp_plugins_path))()
 
 
 def _register_ansible_handler():

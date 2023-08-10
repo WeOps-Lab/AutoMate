@@ -17,6 +17,8 @@ class Settings(BaseSettings):
     celery_broker: str = "redis://:@localhost:6379/0"
     celery_backend: str = "redis://:@localhost:6379/13"
     celery_result_expires: int = 60 * 60 * 24 * 7  # 默认7天
+    # ansible ssh连接超时时间
+    ansible_ssh_timeout: str = str(5 * 60)  # 默认5分钟
     playbook_path = os.path.join(base_dir, "asserts/playbooks")
     private_data_path = os.path.join(base_dir, "ansible_data")
     inventory_path = os.path.join(base_dir, "inventory")
@@ -25,6 +27,7 @@ class Settings(BaseSettings):
     redis_url: str = "redis://:123456@localhost?db=11"
     server_path: str = "server"
     driver_path: str = "core/driver"
+    cmp_plugins_path: str = "cmp_plugins"
     ansible_handler_path: str = "core/driver/ansible/handlers"
 
     push_gateway_url: str = "http://10.10.10.10:9001"
@@ -33,6 +36,10 @@ class Settings(BaseSettings):
 
     vault_token: str = "hvs.1BIQTBf81injy1FdExio6gkj"
 
+    prometheus_rw_url = os.getenv("PROMETHEUS_RW_URL", "http://prome.example.com/api/v1/write")
+
+    prometheus_user = os.getenv("PROMETHEUS_USER", "admin")
+    prometheus_pwd = os.getenv("PROMETHEUS_PWD", "admin")
     max_thread_num: int = 16
 
     class Config:

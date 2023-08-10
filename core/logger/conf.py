@@ -32,6 +32,17 @@ LOGURU_CONFIG = {
             "format": "{time:YYYY-MM-DD HH:mm:ss.SSS} | {thread.name} | {level} | {module} "
             ": {function}:{line} -  {message}",
         },
+        {
+            "sink": os.path.join(settings.logging_dir, "cmp.log"),
+            "enqueue": True,
+            "level": settings.logging_level,
+            "retention": "1 week",
+            "rotation": "100 MB",
+            "encoding": "utf-8",
+            "format": "{time:YYYY-MM-DD HH:mm:ss.SSS} | {thread.name} | {level} | {module} "
+            ": {function}:{line} -  {message}",
+            "filter": lambda x: x["extra"].get("name") == "cmp",
+        },
     ],
 }
 

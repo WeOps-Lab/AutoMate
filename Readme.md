@@ -163,6 +163,7 @@ celery -A server.core.celery_app worker -l info
 3. [核心模块介绍](./core/Readme.md)
 4. [标准运维远程加载插件](./docs/标准运维远程加载插件.md)
 5. [标准运维使用Ansible插件](./docs/标准运维使用Ansible插件.md)
+5. [云平台CMP插件开发](./cmp_plugins/Readme.md)
 
 
 

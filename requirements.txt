@@ -18,8 +18,14 @@ pycryptodome==3.15.0
 ansible-runner==2.2.1
 loguru==0.6.0
 kafka-python==2.0.1
-
+Mako==1.1.4
+aiohttp==3.8.3
 
 redis==2.10.6
 # vault sdk
 hvac==1.0.2
+
+
+# prometheus-write
+protobuf==3.15.0
+python-snappy==0.6.1
