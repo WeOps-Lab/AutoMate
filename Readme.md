@@ -74,13 +74,19 @@ pre-commit install --hook-type commit-msg --allow-missing-config
 
 2.配置开发环境变量
 > 开发配置.env文件,环境变量大写且=两侧无空格
-> 可配置参数可参考server/core/settings 下Settings
+> 可配置参数可参考core/settings 下Settings
+> 考虑到生产环境,部分参数也可以通过环境变量配置
 
 ```shell
 APP_HOST=127.0.0.1
 APP_PORT=8081
 ENV=dev
 REDIS_URL=redis://localhost?db=0
+VAULT_URL=http://vault.example.com
+VAULT_TOKEN=hvs.tokenxxxxxxXXXXXXXX
+CELERY_BROKER=redis://localhost:6379/0
+CELERY_BACKEND=redis://localhost:6379/13
+PROMETHEUS_RW_URL=http://prome.example.com/api/v1/write
 ```
 
 3.启动服务
@@ -89,7 +95,8 @@ REDIS_URL=redis://localhost?db=0
 # 启动fastapi进程
 python main.py
 # 启动celery进程
-celery -A server.core.celery_app worker -l info
+where celery  # 获取celery绝对路径,一般在虚拟环境bin目录下
+celery_abs_path -A core.celery_app worker -l info
 ```
 
 4.查看docs
