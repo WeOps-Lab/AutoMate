@@ -2,7 +2,7 @@ from collections import OrderedDict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import wraps
 
-from core.db.redis_client import redis_client
+from core.db.redis_client import get_redis_client
 from core.settings import settings
 
 
@@ -121,9 +121,10 @@ def count_tag(func):
         if not task_uuid:
             return result
         task_key = THREAD_COUNT_KEY.format(**{"task_uuid": task_uuid})
-        redis_client.hincrby(task_key, "finish", 1)
-        if result:
-            redis_client.hincrby(task_key, "success", 1)
+        with get_redis_client(settings.redis_url) as redis_client:
+            redis_client.hincrby(task_key, "finish", 1)
+            if result:
+                redis_client.hincrby(task_key, "success", 1)
         return result
 
     return inner
@@ -133,7 +134,8 @@ def count_thread_run_task(task_uuid, func, bulk_params, *args):
     """(计数器版多线程执行任务)"""
     data = []
     task_key = THREAD_COUNT_KEY.format(**{"task_uuid": task_uuid})
-    redis_client.hset(task_key, "all", len(bulk_params))
+    with get_redis_client(settings.redis_url) as redis_client:
+        redis_client.hset(task_key, "all", len(bulk_params))
     func = count_tag(func)
 
     future_to_data = {thread_pool.submit(func, *args, _task_uuid=task_uuid, **params) for params in bulk_params}
@@ -144,7 +146,8 @@ def count_thread_run_task(task_uuid, func, bulk_params, *args):
 
 def get_task_execute_percent(task_uuid):
     task_key = THREAD_COUNT_KEY.format(task_uuid)
-    value = redis_client.hgetall(task_key)
+    with get_redis_client(settings.redis_url) as redis_client:
+        value = redis_client.hgetall(task_key)
     finish_count = value.get("finish", 0)
     all_count = value.get("all", 0)
     if not finish_count:

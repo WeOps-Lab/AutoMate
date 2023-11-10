@@ -60,19 +60,14 @@ class CwTemplateCloud(object):
         self.scheme = scheme
         self.kwargs = kwargs
         self.basic_url = f"{self.scheme}://{self.host}"
-        self.api_version = kwargs.get("api_version", "")
         for k, v in kwargs.items():
             setattr(self, k, v)
-        if self.api_version in ["x.y.z"]:
-            self.cw_headers = {
-                "Content-Type": "application/json;charset=UTF-8",
-                "Accept": "application/json",
-            }
-            self.auth_token = self.login()
-            self.cw_headers.update({"X-Auth-Token": self.auth_token, "Accept-Charset": "utf-8;q=1"})
-
-        else:
-            raise Exception("版本不支持,检查是否为x.y.z")
+        self.cw_headers = {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Accept": "application/json",
+        }
+        self.auth_token = self.login()
+        self.cw_headers.update({"X-Auth-Token": self.auth_token, "Accept-Charset": "utf-8;q=1"})
 
     def login(self):
         pass

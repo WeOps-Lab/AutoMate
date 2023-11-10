@@ -173,4 +173,10 @@ celery_abs_path -A core.celery_app worker -l info
 5. [云平台CMP插件开发](./cmp_plugins/Readme.md)
 
 
-
+###  pycharm python console 调试
+> 在preferences(mac)或settings(windows) 搜索python console
+> 在starting script中添加以下内容
+```python
+from core.init import init_service
+init_service()
+```

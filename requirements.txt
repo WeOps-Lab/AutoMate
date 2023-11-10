@@ -9,7 +9,7 @@ puresnmp==1.9.1
 ncclient==0.6.9
 requests
 jinja2
-celery==3.1.25
+celery==4.4.7
 fastapi-utils==0.2.1
 sqlalchemy==1.4.39
 sqlalchemy-utils==0.38.3
@@ -21,7 +21,7 @@ kafka-python==2.0.1
 Mako==1.1.4
 aiohttp==3.8.3
 
-redis==2.10.6
+redis==3.5.3
 # vault sdk
 hvac==1.0.2
 

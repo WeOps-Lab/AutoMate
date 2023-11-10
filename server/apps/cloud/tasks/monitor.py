@@ -80,6 +80,7 @@ def get_and_push_monitor(
     region=None,
     period=300,
     metrics=None,
+    debug=False,
     **kwargs,
 ):
     resource_str = ",".join([i["resource_id"] for i in resources])
@@ -124,6 +125,9 @@ def get_and_push_monitor(
             f"task_id:{task_id};monitor_data:{monitor_data}; resource_mapping:{resource_mapping}"
         )
         return
+    logger.info("-----", metric_list, "-----")
+    if debug:
+        return metric_list
     coroutine = prom_pusher.mpush(metric_list)
     count = asyncio.get_event_loop().run_until_complete(coroutine)
     logger.info(

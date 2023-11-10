@@ -76,6 +76,65 @@ class CloudAPI:
         get_and_push_monitor.delay(**kwargs)
         return CommonResponseSchema()
 
+    @monitor_api.post("/test_monitor_collect/", response_model=CommonResponseSchema, name="开发环境测试监控采集(CMP)")
+    async def test_monitor_collect(
+        self,
+        data: MonitorReqModel = Body(
+            None,
+            description="监控采集(CMP)",
+            example={
+                "cloud_type": "qcloud",
+                "resources": [
+                    {
+                        "bk_obj_id": "qcloud_cvm",
+                        "bk_inst_id": 111,
+                        "resource_id": "ins-qnopai6m",
+                        "bk_inst_name": "深信服",
+                        "bk_biz_id": 2,
+                    },
+                    {
+                        "bk_obj_id": "qcloud_cvm",
+                        "bk_inst_id": 222,
+                        "resource_id": "ins-0g4ehetc",
+                        "bk_inst_name": "autopack",
+                        "bk_biz_id": 2,
+                    },
+                ],
+                "start_time": "2022-12-12 14:10:00",
+                "end_time": "2022-12-12 14:15:00",
+                "host": "",
+                "region": "",
+                "credential_id": "test_cmp/qcloud_1",
+                "metrics": [
+                    "CPUUsage",
+                    "MemUsed",
+                    "MemUsage",
+                    "CvmDiskUsage",
+                    "LanOuttraffic",
+                    "LanIntraffic",
+                    "LanOutpkg",
+                    "LanInpkg",
+                    "WanOuttraffic",
+                    "WanIntraffic",
+                    "WanOutpkg",
+                    "WanInpkg",
+                ],
+                "period": 300,
+            },
+        ),
+    ) -> CommonResponseSchema:
+        credential_id = data.credential_id
+        cloud_type = data.cloud_type
+        credential_data = {}
+        if credential_id:
+            credential_data = get_cmp_cred_by_path(cloud_type, credential_id)
+        kwargs = data.dict()
+        kwargs.pop("credential_id")
+        kwargs.update(credential_data)
+        kwargs.update(debug=True)
+        result = get_and_push_monitor(**kwargs)
+        return CommonResponseSchema(data=result)
+
     @monitor_api.post("/push_metrics/", response_model=CommonResponseSchema, name="监控上报")
     async def push_metrics(
         self,

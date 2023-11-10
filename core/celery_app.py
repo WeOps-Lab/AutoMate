@@ -1,11 +1,10 @@
 from celery import Celery
 
-from core import celeryconfig
 from core.init import init_service
 
 celery_app = Celery(__name__)
 
-celery_app.config_from_object(celeryconfig)
+celery_app.config_from_object("core.celeryconfig")
 
 init_service()
 

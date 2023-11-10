@@ -4,6 +4,7 @@ from core.bootstrap import BootStrap
 from core.settings import settings
 from server.apps.ansible.url import ansible_api
 from server.apps.cloud.url import cloud_api
+from server.apps.collect.url import coll_api as collect_api
 from server.apps.core.url import core_api
 from server.apps.network.url import network_api
 from server.apps.task.url import task_api
@@ -15,6 +16,7 @@ bootstrap = BootStrap(
         network_api,
         core_api,
         ansible_api,
+        collect_api,
         task_api,
         cloud_api,
     ],

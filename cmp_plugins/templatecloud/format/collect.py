@@ -1,10 +1,10 @@
 from core.driver.cmp.collect import CMPCollectFormat
 
 
-class TemplateFormat(CMPCollectFormat):
-    code = "cmp_collect_template"
+class TemplateCloudFormat(CMPCollectFormat):
+    code = "cmp_collect_templatecloud"
     type = "cmp_collect"
-    tag = "cmp.collect.template"
+    tag = "cmp.collect.templatecloud"
     name = "XX云数据转换(cmp)"
     desc = "XX云数据转换(cmp)"
     format_map = {
